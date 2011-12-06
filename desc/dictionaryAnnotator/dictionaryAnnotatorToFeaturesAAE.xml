@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>false</primitive>
+  <delegateAnalysisEngineSpecifiers>
+    <delegateAnalysisEngine key="TypeSystemImporter">
+      <import name="dictionaryAnnotator.TypeSystemImporter"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="dictionaryAnnotatorAE">
+      <import name="dictionaryAnnotator.dictionaryAnnotatorAE"/>
+    </delegateAnalysisEngine>
+  </delegateAnalysisEngineSpecifiers>
+  <analysisEngineMetaData>
+    <name>Dictionary Annotator</name>
+    <description/>
+    <version>11-07-07 revised 11 10 28</version>
+    <vendor>University of Nantes (LINA, UMR CNRS 6241)</vendor>
+    <configurationParameters searchStrategy="language_fallback">
+      <configurationParameter>
+        <name>DictionaryResourceFile</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+        <overrides>
+          <parameter>dictionaryAnnotatorAE/DictionaryResourceFile</parameter>
+        </overrides>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LineToAnnotation</name>
+        <description>Name of the annotation type to create for each line of the csv files</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+        <overrides>
+          <parameter>dictionaryAnnotatorAE/LineToAnnotation</parameter>
+        </overrides>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ColumnsToFeatures</name>
+        <description>list the couples of csv column id and feature names to associate with from the OutputAnnotation 
+the syntax is 
+1-&gt; posTag
+if the values of the second column should be set to the posTag of the OutputAnnotation
+The column 0 is the expression ; it is also possible to set the begin and end features...</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+        <overrides>
+          <parameter>dictionaryAnnotatorAE/ColumnsToFeatures</parameter>
+        </overrides>
+      </configurationParameter>
+      <configurationParameter>
+        <name>CSVSeparator</name>
+        <description>Parameter name of the CSV separator 
+by default a tabulation, '\t', but can be set to comma ',' ...
+
+!!! Not working yet... !!!</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+        <overrides>
+          <parameter>dictionaryAnnotatorAE/CSVSeparator</parameter>
+        </overrides>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ColumnsToAListFeature</name>
+        <description>Name of a StringList feature which will receives all the values of the columns. It is a complementary or an alternative approach to the ColumnsToFeatures approach.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+        <overrides>
+          <parameter>dictionaryAnnotatorAE/ColumnsToAListFeature</parameter>
+        </overrides>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>DictionaryResourceFile</name>
+        <value>
+          <string>resources/dictionaryAnnotator/Test.dic</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>LineToAnnotation</name>
+        <value>
+          <string>common.types.text.LexicalUnit</string>
+        </value>
+      </nameValuePair>
+      <nameValuePair>
+        <name>ColumnsToFeatures</name>
+        <value>
+          <array>
+            <string>1 -&gt; posTag</string>
+          </array>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <flowConstraints>
+      <fixedFlow>
+        <node>dictionaryAnnotatorAE</node>
+        <node>TypeSystemImporter</node>
+      </fixedFlow>
+    </flowConstraints>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs>
+          <type allAnnotatorFeatures="true">common.types.resource.DictEntry</type>
+          <type allAnnotatorFeatures="true">common.types.text.LexicalUnit</type>
+        </outputs>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <resourceManagerConfiguration/>
+</analysisEngineDescription>
