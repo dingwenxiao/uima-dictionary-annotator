@@ -1,0 +1,47 @@
+# UIMA dictionary annotator
+# Copyright (C) 2011  Nicolas Hernandez
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.  
+#
+# TODO File
+# 2011-11-02  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
+
+
+TODO
+  * problem: how to specify which columns contains what ? Sol: A resource with inputstream, a tree class for building the node tree but i think we lose the interest of resource doing like that
+  * problem: how to Add a CaseSensitive parameter since the current search engine is an hash, 
+  * Cite the origin the code source in the NOTICE
+  * build lexicon (scripts to automatically acquire from lefff, see the lefff features, external resources, have a look to the lefff license, choose this license?, write a description)
+
+
+DONE
+  * Add uima nature
+  * Adopt NH name conventions for package (see src, desc and resources dir)  
+  * Abstract methods doParse from DictionaryResource and create an CSVDictionaryResource extension
+  * See uima connectors/ExternanCSV for handling the parameters, parsing the resource,  
+  * Create the parameters for the name of the annotation type to create and the name of the features corresponding to the csv columns and the column to index as a key 
+  * Make the DictionaryAnnotator extend our generic AE class
+  * Implement the annotation creation with features based on parameters: see ExternalCSV2CASAE code (which uses uima-common)
+  * abstract the clean method and extract it to uima-common/collectionUtil :  removeSubsumedAnnotation(Jcas, String subsumingAnnotationT, String subsumedAnnotation);
+  * remove the SimpleTokenizer tokenize and develop an independant project based on the idea  of somple tokens (cut over sequences of digit or letters and for any other single character)
+  * remove the simple and compound parameters
+  * Check if generalization of Word term into Entry is made
+  * Identify code dedicated to resource and extract it to uima-common
+  * Add Class and Methods comments 
+    * Structure the projects with basic License, README... files
+  * Add Apache headers to source files

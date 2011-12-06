@@ -1,0 +1,39 @@
+# UIMA dictionary annotator
+# Copyright (C) 2011  Nicolas Hernandez
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.  
+#
+# TODO File
+# 2011-11-02  Nicolas Hernandez  <nicolas.hernandez@gmail.com>
+
+BASIC IDEA
+  * Implement the managing of dictionaries both by parameter and with UIMA resources, 
+  * Several resource declarations should be possible (right now only one per AE) 
+  * Two formats should be handled: CSV and XML RDF (right now only CSV)
+  * Structure the project into parts for loading the resource, parsing the resource, building the prefix tree from a specific part of each entry, using the resource, removing covered annotations
+  * The CSV structure is set with the first column taking the key expression, the remaining are the associated values
+  * In the CSV structure a variant should have its own line and a same value in a dedicated column identifier
+  * The keys are string of characters which are handled by a prefix tree. 
+  * Because of the current implementation (the characters are handled in a Map and the search by a Map.get() method), the system is CaseSensitive ; test should be performed with a home made search method allowing a caseSensitive parameter
+  * CSV associated values can be set to an annotation both by assigning a column to a feature name or by assigning all the column values to a StringArray feature 
+  * By definition, a dictionary contains entry set expressions (expression figée) 
+or almost set expressions ; depending to the expressions to recognize regex 
+annotator is an alternative.
+The Apache Dictionary Annotator is too simple (does not offer a way to handle associated feature values) and the Concept Mapper is too complex to set up for a non developer user since you have to set up a tokenizer class (it is also one of its capabilities)
+
+  

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <primitive>true</primitive>
+  <annotatorImplementationName>fr.univnantes.lina.uima.dictionaryAnnotator.DictionaryAnnotatorAE</annotatorImplementationName>
+  <analysisEngineMetaData>
+    <name>Dictionary Annotator</name>
+    <description/>
+    <version>110707 revised 111028, 111203</version>
+    <vendor>University of Nantes (LINA, UMR CNRS 6241)</vendor>
+    <configurationParameters>
+      <configurationParameter>
+        <name>DictionaryResourceFile</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>LineToAnnotation</name>
+        <description>Name of the annotation type to create for each line of the csv files</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>true</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ColumnsToFeatures</name>
+        <description>list the couples of csv column id and feature names to associate with from the OutputAnnotation 
+the syntax is 
+1-&gt; posTag
+if the values of the second column should be set to the posTag of the OutputAnnotation
+The column 0 is the expression ; it is also possible to set the begin and end features...</description>
+        <type>String</type>
+        <multiValued>true</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ColumnsToAListFeature</name>
+        <description>Name of a StringList feature which will receives all the values of the columns. It is a complementary or an alternative approach to the ColumnsToFeatures approach.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>CSVSeparator</name>
+        <description>Parameter name of the CSV separator 
+by default a tabulation, '\t', but can be set to comma ',' ...
+
+!!! Not working yet... !!!</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>FeaturePathToSearch</name>
+        <description>By default the dictionary entries will be searched in the following feature path  uima.tcas.DocumentAnnotation:coveredText
+Should be of String type.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>ExactMatch</name>
+        <description>Determines whether a dictionary entry should exactly match the feature path value. 
+Default is false.
+If you are searching the whole document, set DocumentationAnnotation (the default) to the FeaturePathToSearch parameter and  false (the default) to the ExactMatch parameter.
+If you set the ExactMatch parameter to false be sure that there is an isomorphim between the annotation's covered text and its feature path value (should have the same size) otherwise there is no garantee about what will be annotated 
+If you set the ExactMatch parameter to true, the offsets of the dictionary annotation to create (LineToAnnotation) will be set to the offset of the annotation.</description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+      <configurationParameter>
+        <name>AnnotateAnnotationWhereFeaturePathBelongs</name>
+        <description>isomorphism (same offset length between the annotation covered text and its feature string value)
+ExactMatch the dictionary entry covers the whole text / feature value
+AnnotateAnnotationWhereFeaturePathBelongs otherwise annotate within the coveredText 
+
+Case Isomorphism ExactMatch AnnotateAnnotation
+1	T	T	T	
+2	T	T	F
+3	T	F	T
+4	T	F	F
+5	F	T	T
+6	F	T	F
+7	F	F	T
+8	F	F	F	
+
+1, 2, 3, 5 and 7 annotate annotations either because they occurs exactly as feature value/coverText of annotations (1 and 2 result in the same because of isomorphism), they contain a dictionary entry exactly (5)  or not (3 and 7).
+4 annotates dictionary entries occurring at any place in a feature value (classical case searching within DocumentAnnotation)
+6 and 8 have no guarantee since they aims at annotating a substring of a feature value without isomorphism with the covered text </description>
+        <type>Boolean</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings/>
+    <typeSystemDescription/>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs/>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+    <operationalProperties>
+      <modifiesCas>true</modifiesCas>
+      <multipleDeploymentAllowed>true</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </analysisEngineMetaData>
+  <externalResourceDependencies>
+    <externalResourceDependency>
+      <key>DictionaryResource</key>
+      <description/>
+      <interfaceName>fr.univnantes.lina.uima.resources.CSVDictionaryResource</interfaceName>
+      <optional>false</optional>
+    </externalResourceDependency>
+  </externalResourceDependencies>
+  <resourceManagerConfiguration>
+    <externalResources>
+      <externalResource>
+        <name>DefaultDictionaryResource</name>
+        <description/>
+        <fileResourceSpecifier>
+          <fileUrl>dictionaryAnnotator/Default.dic</fileUrl>
+        </fileResourceSpecifier>
+        <implementationName>fr.univnantes.lina.uima.resources.CSVDictionaryResource</implementationName>
+      </externalResource>
+    </externalResources>
+    <externalResourceBindings>
+      <externalResourceBinding>
+        <key>DictionaryResource</key>
+        <resourceName>DefaultDictionaryResource</resourceName>
+      </externalResourceBinding>
+    </externalResourceBindings>
+  </resourceManagerConfiguration>
+</analysisEngineDescription>
