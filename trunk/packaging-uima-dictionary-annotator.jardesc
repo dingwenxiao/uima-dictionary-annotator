@@ -13,16 +13,16 @@
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
         <file path="/uima-dictionary-annotator/.classpath"/>
         <file path="/uima-dictionary-annotator/README"/>
-        <folder path="/uima-dictionary-annotator/.settings"/>
         <folder path="/uima-dictionary-annotator/lib"/>
-        <javaElement handleIdentifier="=uima-dictionary-annotator/resources"/>
-        <folder path="/uima-dictionary-annotator/conf"/>
+        <folder path="/uima-dictionary-annotator/resources"/>
         <folder path="/uima-dictionary-annotator/metadata"/>
+        <folder path="/uima-dictionary-annotator/conf"/>
         <file path="/uima-dictionary-annotator/TODO"/>
         <file path="/uima-dictionary-annotator/.project"/>
-        <javaElement handleIdentifier="=uima-dictionary-annotator/desc"/>
+        <folder path="/uima-dictionary-annotator/desc"/>
         <file path="/uima-dictionary-annotator/LICENSE"/>
         <folder path="/uima-dictionary-annotator/data"/>
+        <file path="/uima-dictionary-annotator/packaging-uima-dictionary-annotator.jardesc"/>
         <javaElement handleIdentifier="=uima-dictionary-annotator/src"/>
         <folder path="/uima-dictionary-annotator/doc"/>
     </selectedElements>
