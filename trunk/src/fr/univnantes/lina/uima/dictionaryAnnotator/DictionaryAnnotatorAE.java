@@ -119,7 +119,7 @@ public class DictionaryAnnotatorAE extends CommonAE {
 	 * Name of the default feature path to search
 	 */
 	private static String DEFAULT_FEATUREPATH_TO_SEARCH = "uima.tcas.DocumentAnnotation:coveredText";
-
+	
 	private static Boolean DEFAULT_EXACT_MATCH_VALUE = false;
 
 	/**
@@ -150,7 +150,7 @@ public class DictionaryAnnotatorAE extends CommonAE {
 	private String arrayFeatureName = null;
 
 
-	//	private Boolean debug = false;
+		private Boolean debug = true;
 
 	private String csvSeparatorString = "";
 
@@ -252,26 +252,39 @@ public class DictionaryAnnotatorAE extends CommonAE {
 			String outputAnnotationString, String ouputFeatureString)
 					throws AnalysisEngineProcessException {
 
+		System.out.println("Debug: inputViewJCas.getViewName() "+inputViewJCas.getViewName());
+
+		
 		FSIterator subContextAnnotationIterator = AnnotationCollectionUtils.subiterator(
 				inputViewJCas, contextAnnotation);
 
+		Boolean atLeastOneAnnotationToSearchFoundAmoungTheSubContextAnnotation = false;
 		// for each annotation to search under the context annotation
 		while (subContextAnnotationIterator.hasNext()) {
 			Annotation aSubAnnotation = (Annotation) subContextAnnotationIterator
 					.next();
 
-			//System.out.println("Debug: aWordAnnotation.getClass().getName() "+aWordAnnotation.getClass().getName()+" wordTypeName"+ wordTypeName);
-			if (aSubAnnotation.getClass().getName().equalsIgnoreCase(annotationToSearch)) {
+			System.out.println("Debug: annotationToSearch "+annotationToSearch);
+			System.out.println("Debug: aSubAnnotation.getClass().getName() "+aSubAnnotation.getClass().getName());
 
-				//System.out.println("Debug: anAnnotationToSearch.getBegin()>"+aSubAnnotation.getBegin()+ "< anAnnotationToSearch.getEnd()>"+aSubAnnotation.getEnd()+ "<" );
+			//System.out.println("Debug: annotationToSearch.getClass().getName() "+annotationToSearch.getClass().getName()+" wordTypeName"+ wordTypeName);
+			if (aSubAnnotation.getClass().getName().equalsIgnoreCase(annotationToSearch)) {
+				atLeastOneAnnotationToSearchFoundAmoungTheSubContextAnnotation = true;
+
+				System.out.println("Debug: if (aSubAnnotation.getClass().getName().equalsIgnoreCase(annotationToSearch)) {");
+
+				System.out.println("Debug: anAnnotationToSearch.getBegin()>"+aSubAnnotation.getBegin()+ "< anAnnotationToSearch.getEnd()>"+aSubAnnotation.getEnd()+ "<" );
 				//
 				String featurePathValue = (String) FeatureUtils.getFeatureValue(aSubAnnotation, featureToSearch); // contextAnnotation.getCoveredText();
 
 				// dictionary word recognizer
 				this.recognize(inputViewJCas,this.getRootNode(),aSubAnnotation.getBegin(), aSubAnnotation.getEnd(), featurePathValue);
-
 			}
-
+		}
+		if (!atLeastOneAnnotationToSearchFoundAmoungTheSubContextAnnotation) {
+			System.err.println("WARNING: the specified context annotation "+annotationToSearch+" has not be found in the annotation index. Check the "+FEATUREPATH_TO_SEARCH_PARAM+" parameter. By default the process has been performed on the whole document text of the current view");
+			this.recognize(inputViewJCas,this.getRootNode(), 0, inputViewJCas.getDocumentText().length(), "coveredText");
+			//getView(inputViewJCas.getViewName()).
 
 		}
 		// keep both or remove the embedded simple ones
@@ -296,7 +309,7 @@ public class DictionaryAnnotatorAE extends CommonAE {
 
 		//
 		Map<PrefixTree,Branch> currentExploredBranches = new HashMap<PrefixTree,Branch>();
-		//if (debug) System.out.println("Debug: Start a new exploration of the tree with the first char");
+		if (debug)		System.out.println("Debug: Start a new exploration of the tree with the first char");
 		currentExploredBranches.put(root,new Branch(annotationToCreateType,0 + relativeBegin));
 
 		int length = text.length();
