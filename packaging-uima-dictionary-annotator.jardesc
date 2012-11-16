@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="uima-dictionary-annotator/target/uima-dictionary-annotator-v111205.jar"/>
+    <jar path="uima-dictionary-annotator/target/uima-dictionary-annotator-v120111.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/uima-dictionary-annotator/packaging-uima-dictionary-annotator.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -11,19 +11,19 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/uima-dictionary-annotator/metadata/install.xml"/>
         <file path="/uima-dictionary-annotator/.classpath"/>
         <file path="/uima-dictionary-annotator/README"/>
-        <folder path="/uima-dictionary-annotator/lib"/>
-        <folder path="/uima-dictionary-annotator/resources"/>
-        <folder path="/uima-dictionary-annotator/metadata"/>
-        <folder path="/uima-dictionary-annotator/conf"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/src&lt;fr.univnantes"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/desc&lt;dictionaryAnnotator"/>
         <file path="/uima-dictionary-annotator/TODO"/>
         <file path="/uima-dictionary-annotator/.project"/>
-        <folder path="/uima-dictionary-annotator/desc"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/src&lt;fr"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/resources&lt;dictionaryAnnotator"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/src&lt;fr.univnantes.lina.uima"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/src&lt;fr.univnantes.lina.uima.dictionaryAnnotator"/>
+        <javaElement handleIdentifier="=uima-dictionary-annotator/src&lt;fr.univnantes.lina"/>
         <file path="/uima-dictionary-annotator/LICENSE"/>
-        <folder path="/uima-dictionary-annotator/data"/>
         <file path="/uima-dictionary-annotator/packaging-uima-dictionary-annotator.jardesc"/>
-        <javaElement handleIdentifier="=uima-dictionary-annotator/src"/>
-        <folder path="/uima-dictionary-annotator/doc"/>
     </selectedElements>
 </jardesc>
